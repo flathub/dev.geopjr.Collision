@@ -75,11 +75,18 @@ modules:
     buildsystem: simple
     build-commands:
       - for i in ./lib/*/; do ln -snf ".." "$i/lib"; done
-      - glib-compile-resources --sourcedir data --target data/dev.geopjr.Collision.gresource data/dev.geopjr.Collision.gresource.xml
-      - COLLISION_LOCALE_LOCATION="/app/share/locale" $(pwd)/crystal/bin/crystal build ./src/collision.cr -Dpreview_mt --no-debug --release
-      - msgfmt --xml --template data/dev.geopjr.Collision.metainfo.xml.in -d "./po" -o data/dev.geopjr.Collision.metainfo.xml
-      - msgfmt --desktop --template data/dev.geopjr.Collision.desktop.in -d "./po" -o data/dev.geopjr.Collision.desktop
-      - mkdir -p po/mo && for lang in `cat "po/LINGUAS"`; do if [[ "$lang" == 'en' || "$lang" == '' ]]; then continue; fi; mkdir -p "/app/share/locale/$lang/LC_MESSAGES"; msgfmt "po/$lang.po" -o "po/mo/$lang.mo";  install -D -m 0644 "po/mo/$lang.mo" "/app/share/locale/$lang/LC_MESSAGES/dev.geopjr.Collision.mo"; done
+      - glib-compile-resources --sourcedir data --target data/dev.geopjr.Collision.gresource
+        data/dev.geopjr.Collision.gresource.xml
+      - COLLISION_LOCALE_LOCATION="/app/share/locale" $(pwd)/crystal/bin/crystal build
+        ./src/collision.cr -Dpreview_mt --no-debug --release
+      - msgfmt --xml --template data/dev.geopjr.Collision.metainfo.xml.in -d "./po"
+        -o data/dev.geopjr.Collision.metainfo.xml
+      - msgfmt --desktop --template data/dev.geopjr.Collision.desktop.in -d "./po"
+        -o data/dev.geopjr.Collision.desktop
+      - mkdir -p po/mo && for lang in `cat "po/LINGUAS"`; do if [[ "$lang" == 'en'
+        || "$lang" == '' ]]; then continue; fi; mkdir -p "/app/share/locale/$lang/LC_MESSAGES";
+        msgfmt "po/$lang.po" -o "po/mo/$lang.mo";  install -D -m 0644 "po/mo/$lang.mo"
+        "/app/share/locale/$lang/LC_MESSAGES/dev.geopjr.Collision.mo"; done
     post-install:
       - install -D -m 0755 collision /app/bin/collision
       - install -D -m 0644 data/dev.geopjr.Collision.desktop /app/share/applications/dev.geopjr.Collision.desktop
@@ -89,8 +96,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/GeopJr/Collision.git
-        tag: v3.0.0
-        commit: 9149e66eef54d02f570fc78f58f29cd26dc32f09
+        tag: v3.0.1
+        commit: 7a2c0091460353bc46c20934e236b5d19ca34027
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
