@@ -50,8 +50,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/GeopJr/Collision.git
-        tag: v3.0.2
-        commit: 3982c3f66c976aa9f70f680ff2129aa53eb460ac
+        tag: v3.0.3
+        commit: ac83b4055bfab205a162977f72f3417760bf449a
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
