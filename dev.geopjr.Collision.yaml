@@ -24,14 +24,23 @@ modules:
       - type: git
         url: https://github.com/libevent/libevent.git
         tag: release-2.1.12-stable
+  # Required by Crystal's yaml
+  # which is being used by the binding generator
+  - name: libyaml
+    sources:
+      - type: archive
+        url: https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz
+        sha256: c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4
   # Collision
   - name: collision
     buildsystem: simple
+    build-options:
+      append-path: /run/build/collision/crystal/bin/
     build-commands:
       - for i in ./lib/*/; do ln -snf ".." "$i/lib"; done
-      - glib-compile-resources --sourcedir data --target data/dev.geopjr.Collision.gresource
-        data/dev.geopjr.Collision.gresource.xml
-      - COLLISION_LOCALE_LOCATION="/app/share/locale" $(pwd)/crystal/bin/crystal build
+      - cd lib/gi-crystal && crystal build src/generator/main.cr && cd ../.. && mkdir ./bin && cp lib/gi-crystal/main ./bin/gi-crystal
+      - ./bin/gi-crystal
+      - COLLISION_LOCALE_LOCATION="/app/share/locale" crystal/bin/crystal build
         ./src/collision.cr -Dpreview_mt --no-debug --release
       - msgfmt --xml --template data/dev.geopjr.Collision.metainfo.xml.in -d "./po"
         -o data/dev.geopjr.Collision.metainfo.xml
