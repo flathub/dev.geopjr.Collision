@@ -24,14 +24,23 @@ modules:
       - type: git
         url: https://github.com/libevent/libevent.git
         tag: release-2.1.12-stable
+  # Required by Crystal's yaml
+  # which is being used by the binding generator
+  - name: libyaml
+    sources:
+      - type: archive
+        url: https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz
+        sha256: c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4
   # Collision
   - name: collision
     buildsystem: simple
+    build-options:
+      append-path: /run/build/collision/crystal/bin/
     build-commands:
       - for i in ./lib/*/; do ln -snf ".." "$i/lib"; done
-      - glib-compile-resources --sourcedir data --target data/dev.geopjr.Collision.gresource
-        data/dev.geopjr.Collision.gresource.xml
-      - COLLISION_LOCALE_LOCATION="/app/share/locale" $(pwd)/crystal/bin/crystal build
+      - cd lib/gi-crystal && crystal build src/generator/main.cr && cd ../.. && mkdir ./bin && cp lib/gi-crystal/main ./bin/gi-crystal
+      - ./bin/gi-crystal
+      - COLLISION_LOCALE_LOCATION="/app/share/locale" crystal/bin/crystal build
         ./src/collision.cr -Dpreview_mt --no-debug --release
       - msgfmt --xml --template data/dev.geopjr.Collision.metainfo.xml.in -d "./po"
         -o data/dev.geopjr.Collision.metainfo.xml
@@ -50,8 +59,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/GeopJr/Collision.git
-        tag: v3.0.3
-        commit: ac83b4055bfab205a162977f72f3417760bf449a
+        tag: v3.0.4
+        commit: 40ca591c72a9a6a6f6e1c4617c1b872025e78002
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
@@ -69,15 +78,15 @@ modules:
         dest: lib/gettext
       - type: git
         url: https://github.com/hugopl/gi-crystal.git
-        tag: v0.11.0
+        tag: v0.13.1
         dest: lib/gi-crystal
       - type: git
         url: https://github.com/hugopl/gtk4.cr.git
-        tag: v0.9.0
+        tag: v0.11.1
         dest: lib/gtk4
       - type: git
         url: https://github.com/geopjr/libadwaita.cr.git
-        commit: ebf5b221d3dbcc5852dc1433b440f99a8b7f094b
+        commit: b427ad9172450095087ea1a456d554fe528624e0
         dest: lib/libadwaita
       - type: git
         url: https://github.com/geopjr/non-blocking-spawn.git
