@@ -38,10 +38,11 @@ modules:
       append-path: /run/build/collision/crystal/bin/
     build-commands:
       - for i in ./lib/*/; do ln -snf ".." "$i/lib"; done
-      - cd lib/gi-crystal && crystal build src/generator/main.cr && cd ../.. && mkdir ./bin && cp lib/gi-crystal/main ./bin/gi-crystal
+      - cd lib/gi-crystal && crystal build src/generator/main.cr && cd ../.. && mkdir
+        ./bin && cp lib/gi-crystal/main ./bin/gi-crystal
       - ./bin/gi-crystal
-      - COLLISION_LOCALE_LOCATION="/app/share/locale" crystal/bin/crystal build
-        ./src/collision.cr -Dpreview_mt --no-debug --release
+      - COLLISION_LOCALE_LOCATION="/app/share/locale" crystal/bin/crystal build ./src/collision.cr
+        -Dpreview_mt --no-debug --release
       - msgfmt --xml --template data/dev.geopjr.Collision.metainfo.xml.in -d "./po"
         -o data/dev.geopjr.Collision.metainfo.xml
       - msgfmt --desktop --template data/dev.geopjr.Collision.desktop.in -d "./po"
@@ -59,8 +60,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/GeopJr/Collision.git
-        tag: v3.0.4
-        commit: 40ca591c72a9a6a6f6e1c4617c1b872025e78002
+        tag: v3.0.5
+        commit: 76794c3daf1fa7ff7807e3bf238c723e92d70819
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
