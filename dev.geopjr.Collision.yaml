@@ -57,6 +57,8 @@ modules:
       - install -D -m 0644 data/icons/dev.geopjr.Collision.svg /app/share/icons/hicolor/scalable/apps/dev.geopjr.Collision.svg
       - install -D -m 0644 data/icons/dev.geopjr.Collision-symbolic.svg /app/share/icons/hicolor/symbolic/apps/dev.geopjr.Collision-symbolic.svg
       - install -D -m 0644 data/dev.geopjr.Collision.metainfo.xml /app/share/metainfo/dev.geopjr.Collision.metainfo.xml
+      - install -D -m 0644 data/dev.geopjr.Collision.gschema.xml /app/share/glib-2.0/schemas/dev.geopjr.Collision.gschema.xml
+      - glib-compile-schemas /app/share/glib-2.0/schemas
     sources:
       - type: git
         url: https://github.com/GeopJr/Collision.git
