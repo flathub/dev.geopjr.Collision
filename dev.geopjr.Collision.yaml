@@ -35,7 +35,7 @@ modules:
   - name: collision
     buildsystem: simple
     build-options:
-      append-path: /run/build/collision/crystal/bin/
+      append-path: /run/build/collision/crystal/bin/:/run/build/collision/crystal/.build/
     build-commands:
       - for i in ./lib/*/; do ln -snf ".." "$i/lib"; done
       - cd lib/gi-crystal && crystal build src/generator/main.cr && cd ../.. && mkdir
@@ -75,8 +75,8 @@ modules:
           - x86_64
       - type: archive
         dest: crystal/
-        url: https://dev.alpinelinux.org/archive/crystal/crystal-1.5.1-aarch64-alpine-linux-musl.tar.gz
-        sha256: 49d8077777b947efe017b398cf7304682edecc8fe37327e9096999dea3de4412
+        url: https://nightly.link/crystal-lang/crystal/actions/runs/3387850926/crystal-aarch64-gnu.zip
+        sha256: 12c94aec7fd87c374404f19d77222211c91eb6f61f6283f42c38fb66a090e13d
         only_arches:
           - aarch64
       - type: git
