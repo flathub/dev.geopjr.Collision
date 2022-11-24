@@ -37,7 +37,7 @@ modules:
     build-options:
       append-path: /run/build/collision/crystal/bin/
     build-commands:
-      - [ ! -f ./crystal/usr/ ] || mv ./crystal/usr/* ./crystal/
+      - "[ ! -f ./crystal/usr/ ] || mv ./crystal/usr/* ./crystal/"
       - for i in ./lib/*/; do ln -snf ".." "$i/lib"; done
       - cd lib/gi-crystal && crystal build src/generator/main.cr && cd ../.. && mkdir
         ./bin && cp lib/gi-crystal/main ./bin/gi-crystal
@@ -48,7 +48,8 @@ modules:
         -o data/dev.geopjr.Collision.metainfo.xml
       - msgfmt --desktop --template data/dev.geopjr.Collision.desktop.in -d "./po"
         -o data/dev.geopjr.Collision.desktop
-      - mkdir -p po/mo && for lang in `cat "po/LINGUAS"`; do if [[ "$lang" == 'en'
+      - >-
+        mkdir -p po/mo && for lang in `cat "po/LINGUAS"`; do if [[ "$lang" == 'en'
         || "$lang" == '' ]]; then continue; fi; mkdir -p "/app/share/locale/$lang/LC_MESSAGES";
         msgfmt "po/$lang.po" -o "po/mo/$lang.mo";  install -D -m 0644 "po/mo/$lang.mo"
         "/app/share/locale/$lang/LC_MESSAGES/dev.geopjr.Collision.mo"; done
