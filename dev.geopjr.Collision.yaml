@@ -76,7 +76,7 @@ modules:
       - type: archive
         dest: crystal/
         url: https://nightly.link/crystal-lang/crystal/actions/runs/3387850926/crystal-aarch64-gnu.zip
-        sha256: 12c94aec7fd87c374404f19d77222211c91eb6f61f6283f42c38fb66a090e13d
+        sha256: cc225c0c59d718e9da8f98716fab79934c79623450917090032f2c5940b5c7c7
         only_arches:
           - aarch64
       - type: git
