@@ -36,6 +36,8 @@ modules:
     buildsystem: simple
     build-options:
       append-path: /run/build/collision/crystal/bin/
+      env:
+        CC: gcc
     build-commands:
       - "sed -i 's/{{ `shards version #{__DIR__}`.strip.stringify }}/{{read_file(\"\
         #{__DIR__}\\/..\\/..\\/shard.yml\").split(\"version: \")[1].split(\"\\\\n\"\
