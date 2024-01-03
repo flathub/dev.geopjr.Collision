@@ -38,6 +38,7 @@ modules:
       append-path: /run/build/collision/crystal/bin/
       env:
         BLAKE3_NO_SSE2: "1"
+        BLAKE3_NO_SSE41: "1"
     build-commands:
       - "sed -i 's/{{ `shards version #{__DIR__}`.strip.stringify }}/{{read_file(\"\
         #{__DIR__}\\/..\\/..\\/shard.yml\").split(\"version: \")[1].split(\"\\\\n\"\
