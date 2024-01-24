@@ -39,12 +39,12 @@ modules:
       arch:
         aarch64:
           env:
-            CC: "gcc"
-            BLAKE3_NO_SSE2: "1"
-            BLAKE3_NO_SSE41: "1"
-            BLAKE3_NO_AVX2: "1"
-            BLAKE3_NO_AVX512: "1"
-            BLAKE3_USE_NEON: "1"
+            CC: gcc
+            BLAKE3_NO_SSE2: '1'
+            BLAKE3_NO_SSE41: '1'
+            BLAKE3_NO_AVX2: '1'
+            BLAKE3_NO_AVX512: '1'
+            BLAKE3_USE_NEON: '1'
     build-commands:
       - "sed -i 's/{{ `shards version #{__DIR__}`.strip.stringify }}/{{read_file(\"\
         #{__DIR__}\\/..\\/..\\/shard.yml\").split(\"version: \")[1].split(\"\\\\n\"\
@@ -75,8 +75,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/GeopJr/Collision.git
-        tag: v3.7.0
-        commit: 96ed26477856ed50301cea3ea6fa59fe59cb3484
+        tag: v3.7.1
+        commit: 838f34d6146f6f289dc91824d46413e1c43be4ec
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
