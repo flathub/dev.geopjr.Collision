@@ -86,6 +86,7 @@ modules:
         url: https://github.com/geopjr/blake3.cr.git
         branch: feat/v1.3.0
         dest: lib/blake3
+        commit: fd18ad8538194db014bcb765a496a1d932cfff21
       - type: git
         url: https://github.com/geopjr/gettext.cr.git
         tag: v1.0.0
